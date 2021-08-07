@@ -1,0 +1,7 @@
+Driver Class : org.h2.Driver
+JDBC URL: jdbc:h2:mem:testdb
+User Name: sa
+Pasword: <leave this empty>
+
+
+https://www.youtube.com/watch?v=UFW1KC-tMjs

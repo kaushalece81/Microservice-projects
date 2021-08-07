@@ -1,0 +1,4 @@
+to configure limt service to pick value from config server we should rename 
+application.properties to bootstrap.properties
+
+and also remove  minimum and maximum properties declaration from the properties file

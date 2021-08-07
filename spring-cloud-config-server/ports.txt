@@ -1,0 +1,31 @@
+Limits Service	8080, 8081, ...
+Spring Cloud Config Server	8888
+Currency Exchange Service	8000, 8001, 8002, ..
+Currency Conversion Service	8100, 8101, 8102, ...
+Netflix Eureka Naming Server	8761
+Netflix Zuul API Gateway Server	8765
+Zipkin Distributed Tracing Server	9411
+
+
+steps for confiuration
+=======================
+mkdir git-localconfig-repo
+cd git-localconfig-repo
+git init
+right click currentproject[spring-cloud-config-server] -->buildpath
+-->linksource-->browse to folder [ git-localconfig-repo]-->open--> Finish
+In project structure in sts--> go to folder  [git-localconfig-repo]-->
+create new file under it limits-service.properties
+
+git add -A
+git commit -m "adding limits-service.properties"
+git push
+
+now in spring-cloud-config-server\src\main\resources\application.properties
+add property
+spring.cloud.config.server.git.uri=kaushalece81/microservices/tree/master/git-localconfig-repo
+
+use @EnableConfigServer  in main class
+
+
+spring boot tools plugin to populate automaticlly in properties file

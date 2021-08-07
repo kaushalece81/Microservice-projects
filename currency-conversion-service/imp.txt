@@ -1,0 +1,46 @@
+for ribbon client side load balancing able to distrubute load once to 8000 and next to 8001
+add dependency  spring-cloud-starter-netflix-ribbon in pom.xml
+add in property file currency-exchange-service.ribbon.listOfServers= http://localhost:8000,http://localhost:8001
+add annotation in CurrencyExchangeServiceProxy
+@FeignClient(name = "currency-exchange-service")
+@RibbonClient(name = "currency-exchange-service")
+
+
+need of naming server
+===========================
+
+whenever new server is added of currency exchange service then
+ we need to update the below configuration in property file
+ currency-exchange-service.ribbon.listOfServers= http://localhost:8000,http://localhost:8001
+ 
+ so that dynamically incerase or decrease the services Eureka naming server is needed
+ every new service is registered to naming server
+ 
+ two task of naming server
+ 1. Service registery
+ 2. service discovery
+ 
+ 
+ to register with naming server do below steps
+ =================================
+ add eureka discovery client to register with eureka server
+ 		<!-- for registry with eureka naming server -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+ In property file
+ # to enable eureka naming server need to configure eureka naming server url
+eureka.client.service-url.default-zone=http://localhost:8761/
+
+//to register with eureka naming server need to add below annotation
+@EnableDiscoveryClient
+public class CurrencyConversionServiceApplication
+
+
+also comment below property hard coded
+currency-exchange-service.ribbon.listOfServers= http://localhost:8000,http://localhost:8001
+
+
+debugging problems
+https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#debugging-problems-with-zuul-api-gateway
